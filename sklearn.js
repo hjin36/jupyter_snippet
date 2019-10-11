@@ -20,6 +20,21 @@ require(["nbextensions/snippets_menu/main"], function(snippets_menu) {
       ]
     },
       {
+        "name": "EDA",
+        "sub-menu": [
+          {
+            "name": "Heat Map",
+            "snippet": ["import seaborn as sns",
+                        "from matplotlib import pyplot as plt",
+                        "cor = df.corr()",
+                        "top = cor.index",
+                        "plt.figure(figsize=(20,20))",
+                        "sns.heatmap(df[top].corr(),annot=True)"
+                     ]
+        }
+      ]
+    },
+      {
         "name": "Processing",
         "sub-menu": [
           {
@@ -63,7 +78,9 @@ require(["nbextensions/snippets_menu/main"], function(snippets_menu) {
         },
           {
             "name": "Logistic Regression",
-            "snippet": ["logr = LogisticRegression(penalty='l1', C=100,random_state=42)"]
+            "snippet": ["from sklearn.linear_model import LogisticRegression",
+                        "logr = LogisticRegression(penalty='l1', C=100,random_state=42)"
+                       ]
         },
           {
             "name": "K-Nearest Neighbors",
@@ -123,6 +140,29 @@ require(["nbextensions/snippets_menu/main"], function(snippets_menu) {
                       "# Replace the name for the corresponding metrics",
                       "print('Accuracy (out-of-sample): %.2f' % accuracy_score(y_test, y_pred))",
                       "print('Accuracy (in-sample): %.2f' % accuracy_score(y_train, y_pred_insample))"
+                     ]
+        },
+          {
+            "name": "Cross-Validation",
+            "snippet": ["from sklearn.model_selection import cross_val_score",
+                      "scores=cross_val_score(clf_lr, X, y, cv=5,scoring = 'f1')"
+                     ]
+        },
+          {
+            "name": "Grid Search",
+            "snippet": ["from sklearn.model_selection import GridSearchCV, KFold, cross_val_score",
+                        "inner_cv = KFold(n_splits=5, shuffle=True)",
+			"outer_cv = KFold(n_splits=5, shuffle=True)",
+                        "gs = GridSearchCV(estimator=DecisionTreeClassifier(random_state=0),",
+                        "param_grid=[{'max_depth': [1, 2, 3, 4, 5, 6, 7, None]}],",
+                        "scoring='accuracy',",
+                        "cv=inner_cv)",
+			"gs = gs.fit(X,y)",
+                        "print('Non-nested CV Accuracy: ', gs.best_score_)",
+                        "print('Optimal Parameter: ', gs.best_params_)",
+			"print('Optimal Estimator: ', gs.best_estimator_)",
+                        "nested_score_gs = cross_val_score(gs, X=X, y=y, cv=outer_cv)",
+                        "print('Nested CV Accuracy: ',nested_score_gs.mean(), ' +/- ', nested_score_gs.std())"
                      ]
         }
       ]
