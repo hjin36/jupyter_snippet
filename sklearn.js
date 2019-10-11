@@ -4,6 +4,22 @@ require(["nbextensions/snippets_menu/main"], function(snippets_menu) {
     "name": "Sklearn",
     "sub-menu": [
       {
+        "name": "Compatibility",
+        "sub-menu": [
+          {
+            "name": "Python 2/3",
+            "snippet": ["from __future__ import division, print_function, unicode_literals"
+                     ]
+        },
+          {
+            "name": "Ignore Warning",
+            "snippet": ["import warnings",
+                      "warnings.filterwarnings('ignore')",
+                     ]
+        }
+      ]
+    },
+      {
         "name": "Processing",
         "sub-menu": [
           {
@@ -51,7 +67,7 @@ require(["nbextensions/snippets_menu/main"], function(snippets_menu) {
         },
           {
             "name": "K-Nearest Neighbors",
-            "snippet": ["kn = KNeighborsClassifier(n_neighbors=9,p=2",
+            "snippet": ["kn = KNeighborsClassifier(n_neighbors=9,p=2,",
                       "metric='minkowski',weights='uniform')"
                      ]
         }
@@ -99,6 +115,14 @@ require(["nbextensions/snippets_menu/main"], function(snippets_menu) {
             "name": "Classification Report",
             "snippet": ["from sklearn.metrics import classification_report",
                       "print(classification_report(y_test, y_pred))"
+                     ]
+        },
+          {
+            "name": "F1 / Recall / Precision / Cohen Kappa",
+            "snippet": ["from sklearn.metrics import accuracy_score, f1_score, cohen_kappa_score, recall_score",
+                      "# Replace the name for the corresponding metrics",
+                      "print('Accuracy (out-of-sample): %.2f' % accuracy_score(y_test, y_pred))",
+                      "print('Accuracy (in-sample): %.2f' % accuracy_score(y_train, y_pred_insample))"
                      ]
         }
       ]
